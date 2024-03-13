@@ -1,0 +1,61 @@
+// Copyright 2024 ecyht2
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+syntax = "proto3";
+
+package babara_project.data;
+
+import "latlng.proto";
+
+// Data collected by the boat.
+message BoatData {
+  // The version of the communication protocol used.
+  string version = 1;
+  // The individual data point collected.
+  repeated BoatDataFeature features = 2;
+
+  // The layer of the water body the data is collected from.
+  enum Layer {
+    // The data is collected from the surface of the water body.
+    SURFACE = 0;
+    // The data is collected from the middle of the water body.
+    MIDDLE = 1;
+    // The data is collected from the sea bed of the water body.
+    SEA_BED = 2;
+  }
+
+  // Individual data point collected by the boat.
+  // Each data point coresponds to a specific location (coordinate) and a layer.
+  message BoatDataFeature {
+    // The temperature measured at the location.
+    double temperature = 1;
+    // The depth the temperature is measured at.
+    double depth = 2;
+    // The layer the temperature is measured at.
+    Layer layer = 3;
+    // The timestamp the temperature is measured at.
+    google.protobuf.Timestamp time = 4;
+    // The location the temperature is measured at.
+    google.type.LatLng geometry = 5;
+  }
+}
+
+// Information on where to collect data for the boat.
+message PathData {
+  // The version of the communication protocol used.
+  string version = 1;
+  // The coordinates to where the data should be collected.
+  repeated google.type.LatLng points = 3;
+}

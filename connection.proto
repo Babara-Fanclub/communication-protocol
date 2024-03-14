@@ -4,12 +4,12 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -19,16 +19,38 @@ package babara_project.connection;
 
 // Connection message with the robot and the desktop.
 message Connect {
-    // The version of the communication protocol used.
-    string version = 1;
-    // string name = 2;
-    // string uuid = 3;
+  // The version of the communication protocol used.
+  string version = 1;
+  // string name = 2;
+  // string uuid = 3;
 }
 
 // Acknowlegement packet to acknowlege the data is received.
 message Received {
-    // The version of the communication protocol used.
-    string version = 1;
-    // string from = 1;
-    // string to = 1;
+  // The version of the communication protocol used.
+  string version = 1;
+  // string from = 1;
+  // string to = 1;
+}
+
+// Message describing a new packet being sent.
+message Packet {
+  // The version of the communication protocol used.
+  string version = 1;
+  // The type of packet being sent.
+  PacketType type = 2;
+
+  // An enumeration of all the packet types.
+  enum PacketType {
+    // Invalid default packet type.
+    UNDEFINED = 0;
+    // A new packet for Connect message packet.
+    CONNECT = 1;
+    // A new packet for Received message packet.
+    RECEIVED = 2;
+    // A new packet for BoatData message packet.
+    BOAT_DATA = 3;
+    // A new packet for PathData message packet.
+    PATH_DATA = 4;
+  }
 }

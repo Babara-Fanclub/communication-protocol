@@ -18,6 +18,7 @@ syntax = "proto3";
 package babara_project.data;
 
 import "latlng.proto";
+import "timestamp.proto";
 
 // Data collected by the boat.
 message BoatData {

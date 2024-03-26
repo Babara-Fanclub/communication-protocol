@@ -39,6 +39,8 @@ message Packet {
   string version = 1;
   // The type of packet being sent.
   PacketType type = 2;
+  // The main data being sent.
+  bytes data = 3;
 
   // An enumeration of all the packet types.
   enum PacketType {
